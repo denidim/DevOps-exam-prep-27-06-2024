@@ -1,0 +1,23 @@
+name: Build-Тest-Deploy
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+jobs:
+  build-test-unit:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Repo checkout
+      uses: actions/checkout@v4
+    - name: Use Node.js latest 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: Install npm dependencies
+      run: npm i
+    - name: Run unit tests
+      run: npm run test:unit
+    - name: Display SoftUni username
+      run: echo "mr.d.dimitrov"
